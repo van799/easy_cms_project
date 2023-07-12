@@ -1,0 +1,35 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>330</x><y>690</y><w>400</w><h>90</h></coordinates><panel_attributes>CmsServer
+--
+get_page(endpoint: str, params: str) -&gt; str: 
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>450</y><w>160</w><h>110</h></coordinates><panel_attributes>ICmsLogger
+--
+error(message: str)
+warning(message: str)
+info(message: str)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>550</y><w>30</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>550</y><w>30</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>310</y><w>160</w><h>80</h></coordinates><panel_attributes>CmsFileLogger
+--
+error(message: str)
+warning(message: str)
+info(message: str)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>380</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>110</x><y>480</y><w>160</w><h>80</h></coordinates><panel_attributes>CmsConsoleLogger
+--
+error(message: str)
+warning(message: str)
+info(message: str)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>510</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>540</x><y>300</y><w>210</w><h>110</h></coordinates><panel_attributes>IRepository&lt;CmsPage&gt;
+--
+add(page: CmsPage)
+get(id: str)
+get_all()
+update(id: str, cms_page: CmsPage)
+delete(id: str)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>540</x><y>190</y><w>210</w><h>80</h></coordinates><panel_attributes>CmsPageRepository</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>260</y><w>30</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLActor</id><coordinates><x>990</x><y>80</y><w>60</w><h>110</h></coordinates><panel_attributes>jeck</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>540</x><y>450</y><w>210</w><h>110</h></coordinates><panel_attributes>ICmsUserContext
+--
+cms_user: CmsUser
+cms_pages: IRepository&lt;CmsPage&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>790</x><y>470</y><w>150</w><h>80</h></coordinates><panel_attributes>CmsUserContext
+--
+cms_user: str
+cms_pages: str</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>740</x><y>500</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>740</x><y>340</y><w>140</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;120;10;120;130</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1000</x><y>470</y><w>150</w><h>80</h></coordinates><panel_attributes>CmsUser
+--
+id: str
+username: str
+password: str</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>940</x><y>80</y><w>60</w><h>110</h></coordinates><panel_attributes>lexx</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>930</x><y>500</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1000</x><y>290</y><w>150</w><h>80</h></coordinates><panel_attributes>CmsPage
+--
+id: str
+namepage:str</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>740</x><y>320</y><w>280</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>260;10;10;10</additional_attributes></element></diagram>
