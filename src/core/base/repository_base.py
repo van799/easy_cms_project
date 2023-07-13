@@ -1,4 +1,6 @@
 from typing import Type
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select, insert, update
 
 from src.core.base.irepository import IRepository, T
 
@@ -8,22 +10,23 @@ class RepositoryBase(IRepository):
         self.__session = session
         self.__model = model
 
-    def add(self, id: str) -> None:
-        db.add(self.__model)
-        await db.commit()
-        await db.refresh(db_obj)
-        return db_obj
+    async def add(self, id: str) -> None:
+        self.__session.add(self.__model)
+        await self.__session.commit()
 
-    def get(self, id: str) -> Type[T]:
+    async def get(self, id: str) -> Type[T]:
         statement = select(self.__model).where(self.__model.id == id)
         results = await self.__session.execute(statement=statement)
         return results.scalar_one_or_none()
 
-    def get_all(self, id: str) -> list[Type[T]]:
-        raise NotImplementedError
+    async def get_all(self, id: str) -> list[Type[T]]:
+        statement = select(self.__model)
+        results = await self.__session.execute(statement=statement)
+        return results.scalars().all()
 
-    def update(self, id: str, item: Type[T]) -> None:
-        raise NotImplementedError
+    async def update(self, id: str, item: Type[T]) -> None:
+        statement = update(self.__model).where(self.__model.id == id)
+        await self.__session.execute(statement=statement)
 
-    def delete(self, id: str) -> None:
+    async def delete(self, id: str) -> None:
         raise NotImplementedError
