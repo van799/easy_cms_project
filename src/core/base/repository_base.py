@@ -19,7 +19,7 @@ class RepositoryBase(IRepository):
         results = await self.__session.execute(statement=statement)
         return results.scalar_one_or_none()
 
-    async def get_all(self, item) -> list[Type[T]]:
+    async def get_all(self) -> list[Type[T]]:
         statement = select(self.__model)
         results = await self.__session.execute(statement=statement)
         return results.scalars().all()
