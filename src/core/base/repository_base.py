@@ -1,6 +1,6 @@
 from typing import Type
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, insert, update
+from sqlalchemy import select, update
 
 from src.core.base.irepository import IRepository, T
 
@@ -10,8 +10,8 @@ class RepositoryBase(IRepository):
         self.__session = session
         self.__model = model
 
-    async def add(self, id: str) -> None:
-        self.__session.add(self.__model)
+    async def add(self, item) -> None:
+        self.__session.add(item)
         await self.__session.commit()
 
     async def get(self, id: str) -> Type[T]:
@@ -19,7 +19,7 @@ class RepositoryBase(IRepository):
         results = await self.__session.execute(statement=statement)
         return results.scalar_one_or_none()
 
-    async def get_all(self, id: str) -> list[Type[T]]:
+    async def get_all(self, item) -> list[Type[T]]:
         statement = select(self.__model)
         results = await self.__session.execute(statement=statement)
         return results.scalars().all()

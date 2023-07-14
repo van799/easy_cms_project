@@ -1,2 +1,2 @@
-class CmsPageRepository():
-
+class CmsPageRepository:
+    pass
