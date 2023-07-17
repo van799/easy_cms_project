@@ -84,6 +84,9 @@ class TestRepositoryBase(unittest.IsolatedAsyncioTestCase):
             repository = TestRepository(session)
             test_common.test_str = 'test update'
             await repository.update('1', test_common)
+
+        async with await test_database.create_session() as session:
+            repository = TestRepository(session)
             result = await repository.get('1')
 
         test_database.dispose()

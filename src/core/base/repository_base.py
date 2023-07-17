@@ -24,11 +24,14 @@ class RepositoryBase(IRepository):
         results = await self.__session.execute(statement=statement)
         return results.scalars().all()
 
+    # удалить id, берем его из item
     async def update(self, id: str, item: Type[T]) -> None:
         values = dict(filter(lambda x: not x[0].startswith('_'), item.__dict__.items()))
         statement = update(self.__model).filter(self.__model.id == id).values(values)
         await self.__session.execute(statement=statement)
+        await self.__session.commit()
 
     async def delete(self, id: str) -> None:
-        statement = update(self.__model).where(self.__model.id == id).values(deleted=True)
+        statement = update(self.__model).filter(self.__model.id == id).values(deleted=True)
         await self.__session.execute(statement=statement)
+        await self.__session.commit()
