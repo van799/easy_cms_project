@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, Boolean
 
 from src.db.db import Base
 
@@ -9,4 +9,5 @@ class TestCommon(Base):
         'id',
         String(length=128),
         primary_key=True)
+    deleted = Column(Boolean, default=False)
     test_str = Column(String)

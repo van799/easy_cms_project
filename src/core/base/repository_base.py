@@ -10,12 +10,12 @@ class RepositoryBase(IRepository):
         self.__session = session
         self.__model = model
 
-    async def add(self, item) -> None:
+    async def add(self, item: Type[T]) -> None:
         self.__session.add(item)
         await self.__session.commit()
 
     async def get(self, id: str) -> Type[T]:
-        statement = select(self.__model).where(self.__model.id == id)
+        statement = select(self.__model).filter(self.__model.id == id)
         results = await self.__session.execute(statement=statement)
         return results.scalar_one_or_none()
 
@@ -25,8 +25,10 @@ class RepositoryBase(IRepository):
         return results.scalars().all()
 
     async def update(self, id: str, item: Type[T]) -> None:
-        statement = update(self.__model).where(self.__model.id == id)
+        values = dict(filter(lambda x: not x[0].startswith('_'), item.__dict__.items()))
+        statement = update(self.__model).filter(self.__model.id == id).values(values)
         await self.__session.execute(statement=statement)
 
     async def delete(self, id: str) -> None:
-        raise NotImplementedError
+        statement = update(self.__model).where(self.__model.id == id).values(deleted=True)
+        await self.__session.execute(statement=statement)
