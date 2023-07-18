@@ -21,7 +21,7 @@ class CmsEntity(DeclarativeBase):
     create_by = Column(String(100))
 
 
-class Users(CmsEntity):
+class CmsUsers(CmsEntity):
     __tablename__ = "users"
 
     username = Column(String(100), unique=True)
