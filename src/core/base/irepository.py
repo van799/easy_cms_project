@@ -1,9 +1,9 @@
 from abc import ABC
 from typing import TypeVar, Generic, Type
 
-# зависимость от CmsEntity класса базовой модели
+from db.models import CmsEntity
+
 T = TypeVar("T", bound=CmsEntity)
-# ModelType = TypeVar("ModelType", bound=CmsEntity)
 
 
 class IRepository(ABC, Generic[T]):

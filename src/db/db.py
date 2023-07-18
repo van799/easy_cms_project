@@ -4,11 +4,10 @@ import os.path
 from datetime import time
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker
 
+from db.models import CmsEntity
 from src.config.app_settings import app_settings
-
-Base = declarative_base()
 
 
 class Database:
@@ -36,7 +35,7 @@ class Database:
 
     async def metadate_create_all(self):
         async with self.engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
+            await conn.run_sync(CmsEntity.metadata.create_all)
 
     async def get_session(self) -> AsyncSession:
         async with self.async_session() as session:

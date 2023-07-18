@@ -22,7 +22,7 @@ class TestRepositoryBase(unittest.IsolatedAsyncioTestCase):
             result = [row for row in await conn.execute(select(TestCommon))]
 
         test_database.dispose()
-        self.assertEqual(result[0][2], 'test')
+        self.assertEqual(result[0][0], 'test')
 
     async def test_base_repository_get_all(self):
         test_database = TestDatabase()

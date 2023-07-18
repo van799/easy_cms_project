@@ -4,7 +4,8 @@ import time
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 
-from src.db.db import Base
+
+from db.models import CmsEntity
 
 
 class TestDatabase:
@@ -21,7 +22,7 @@ class TestDatabase:
 
     async def metadate_create_all(self):
         async with self.test_engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
+            await conn.run_sync(CmsEntity.metadata.create_all)
 
     def dispose(self):
         self.remove_database_file()
