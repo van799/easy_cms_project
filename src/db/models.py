@@ -15,10 +15,13 @@ class CmsEntity(DeclarativeBase):
         String(length=128),
         default=lambda: str(uuid.uuid4()),
         primary_key=True)
-    deleted = Column(Boolean, default=False)
     name = Column(String(100))
+    description = Column(String(256))
     create_at = Column(DateTime(timezone=True), index=True, server_default=func.now())
     create_by = Column(String(100))
+    update_at = Column(DateTime(timezone=True), index=True, server_default=func.now())
+    update_by = Column(String(100))
+    deleted = Column(Boolean, default=False)
 
 
 class CmsUsers(CmsEntity):
@@ -29,6 +32,12 @@ class CmsUsers(CmsEntity):
 
 
 class CmsPage(CmsEntity):
+    __tablename__ = "cmspage"
+
+    page_name = Column(String(100))
+
+
+class CmsEndpoint(CmsEntity):
     __tablename__ = "cms_page"
 
-    name_page = Column(String(100), unique=True)
+    endpoint = Column(String(256))

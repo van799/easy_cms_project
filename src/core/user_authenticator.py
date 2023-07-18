@@ -27,7 +27,7 @@ class UserAuthenticator:
     async def register_user(self, username: str, password: str):
         cms_user_repository = CmsUserRepository(self.__session)
 
-        find_user = (await cms_user_repository.get_by_name(username))
+        find_user = (await cms_user_repository.get_by_username(username))
         if find_user is None:
             user = CmsUsers()
             user.username = username
@@ -37,8 +37,8 @@ class UserAuthenticator:
         return False
 
     async def authenticate_user(self, username: str, password: str):
-        user_repository = UserRepository(self.__session)
-        user = await user_repository.get_user_by_name(username)
+        user_repository = CmsUserRepository(self.__session)
+        user = await user_repository.get_by_username(username)
         if not user:
             return False
         if not self.verify_password(password, user.hashed_password):
@@ -73,8 +73,8 @@ class UserAuthenticator:
         except JWTError:
             raise credentials_exception
 
-        user_repository = UserRepository(session)
-        user = await user_repository.get_user_by_name(username)
+        user_repository = CmsUserRepository(session)
+        user = await user_repository.get_by_username(username)
 
         if user is None:
             raise credentials_exception

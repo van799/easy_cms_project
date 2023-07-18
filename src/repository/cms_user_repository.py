@@ -11,7 +11,7 @@ class CmsUserRepository(RepositoryBase):
     def __init__(self, engine):
         super().__init__(engine, CmsUsers)
 
-    async def get_by_name(self, name: str) -> Type[T]:
-        statement = select(self.__model).filter(self.__model.name == name)
-        results = await self.__session.execute(statement=statement)
+    async def get_by_username(self, username: str) -> Type[T]:
+        statement = select(self._model).filter(self._model.username == username)
+        results = await self._session.execute(statement=statement)
         return results.scalar_one_or_none()
