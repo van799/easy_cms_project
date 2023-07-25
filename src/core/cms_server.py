@@ -4,7 +4,7 @@ from src.core.cms_page import CmsPage
 
 
 class CmsServer:
-    async def get_page(self, endpoint: str, params: str) -> CmsPage:
+    async def get_page(self, endpoint: str) -> CmsPage:
         clear_endpoint = CmsServer.delete_prefix(endpoint)
         if CmsServer.is_str_none_or_blank(clear_endpoint):
             return await self.get_index_page()

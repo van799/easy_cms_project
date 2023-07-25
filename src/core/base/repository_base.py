@@ -25,9 +25,9 @@ class RepositoryBase(IRepository):
         return results.scalars().all()
 
     # удалить id, берем его из item
-    async def update(self, id: str, item: Type[T]) -> None:
+    async def update(self, item: Type[T]) -> None:
         values = dict(filter(lambda x: not x[0].startswith('_'), item.__dict__.items()))
-        statement = update(self._model).filter(self._model.id == id).values(values)
+        statement = update(self._model).filter(self._model.id == item.id).values(values)
         await self._session.execute(statement=statement)
         await self._session.commit()
 

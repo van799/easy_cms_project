@@ -16,7 +16,7 @@ class IRepository(ABC, Generic[T]):
     def get_all(self) -> list[Type[T]]:
         raise NotImplementedError
 
-    def update(self, id: str, item: Type[T]) -> None:
+    def update(self, item: Type[T]) -> None:
         raise NotImplementedError
 
     def delete(self, id: str) -> None:

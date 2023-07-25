@@ -69,6 +69,8 @@ class TestRepositoryBase(unittest.IsolatedAsyncioTestCase):
     async def test_base_repository_update(self):
         test_database = TestDatabase()
         test_common = TestCommon()
+        test_common.id = '1'
+        test_common.test_str = 'test update'
 
         values_dict = [{'id': 1, 'test_str': 'test1'},
                        {'id': 2, 'test_str': 'test2'},
@@ -82,8 +84,7 @@ class TestRepositoryBase(unittest.IsolatedAsyncioTestCase):
 
         async with await test_database.create_session() as session:
             repository = TestRepository(session)
-            test_common.test_str = 'test update'
-            await repository.update('1', test_common)
+            await repository.update(test_common)
 
         async with await test_database.create_session() as session:
             repository = TestRepository(session)
