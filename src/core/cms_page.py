@@ -1,17 +1,17 @@
-class CmsPage:
-    def __init__(self, id: str, page_name: str, content: str):
-        self._id = id
-        self._page_name = page_name
-        self._content = content
+from core.cms_page_base import CmsPageBase
 
-    @property
-    def id(self) -> str:
-        return self._id
 
-    @property
-    def page_name(self) -> str:
-        return self._page_name
-
-    @property
-    def content(self) -> str:
-        return self._content
+class CmsPage(CmsPageBase):
+    def __init__(self,
+                 title: str,
+                 body: str,
+                 footer: str,
+                 header: str,
+                 id: str,
+                 page_name: str,
+                 content: str):
+        super().__init__(id, page_name, content)
+        self.title = title
+        self.header = header
+        self.body = body
+        self.footer = footer

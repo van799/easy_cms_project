@@ -1,4 +1,6 @@
-from starlette.responses import FileResponse
+import os
+
+from jinja2 import FileSystemLoader, Environment
 
 from src.core.cms_page import CmsPage
 
@@ -11,8 +13,8 @@ class CmsServer:
         return await self.get_error_page()
 
     async def get_index_page(self) -> CmsPage:
-        content = CmsServer.read_page_content('static/index.html')
-        cms_page = CmsPage('0', 'index', content)
+        content = CmsServer.read_page_content('static/templates/test_index.html')
+        cms_page = CmsPage('Тайтл главной тсранице', 'index', 'header', '0', 'index_test', content)
         return cms_page
 
     async def get_error_page(self) -> CmsPage:
@@ -22,9 +24,13 @@ class CmsServer:
 
     @staticmethod
     def read_page_content(file_name: str):
-        with open(file_name) as f:
-            lines = f.readlines()
-        return ''.join(lines)
+        path = os.path.join(os.path.dirname(__file__), '../static/templates')
+        file_loader = FileSystemLoader(searchpath=path)
+        env = Environment(loader=file_loader)
+
+        template = env.get_template('test_index.html')
+        msg = template.render(title='тайтл лучшего сайта на свете', content='саммый лучший CMS на свете')
+        return msg
 
     @staticmethod
     def delete_prefix(endpoint: str):
