@@ -14,7 +14,7 @@ class CmsServer:
 
     async def get_index_page(self) -> CmsPage:
         content = CmsServer.read_page_content('static/templates/test_index.html')
-        cms_page = CmsPage('Тайтл главной тсранице', 'index', 'header', '0', 'index_test', content)
+        cms_page = CmsPage('Тайтл главной тсранице', 'index', 'header', '0', 'index_test', 'index_test', content)
         return cms_page
 
     async def get_error_page(self) -> CmsPage:
