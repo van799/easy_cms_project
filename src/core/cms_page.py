@@ -64,6 +64,7 @@ cms_page.add(CmsPageHeader('Заголовок сайта', 2))
 cms_page.add(CmsPageHeader('Заголовок сайта', 3))
 cms_page.add(CmsPageHeader('Заголовок сайта', 4))
 
+
 print(cms_page.render())
 
 
