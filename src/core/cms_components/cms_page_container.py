@@ -1,40 +1,25 @@
-from yattag import Doc, indent
-
+from yattag import Doc
 
 
 class CmsPageContainer:
-    def __init__(self, div_id, div_class, tags):
-        self.css_class = div_class
-        self.div_id = div_id
-        self.tags = tags
+    def __init__(self, id, css_class):
+        self.css_class = css_class
+        self.id = id
+        self.elements = []
+
+    def add(self, element):
+        self.elements.append(element)
+        return self
 
     def render(self):
         doc, tag, text, line = Doc().ttl()
 
-        with tag('div', id=self.div_id):
-            doc.asis(self.tags)
+        with tag('div', id=self.id, klass=self.css_class):
+            for element in self.elements:
+                doc.asis(element.render())
         return doc.getvalue()
 
-
-# cms_page = CmsPage('0', 'Главная страница', '0')
-#
-# cms_page.add(CmsPageHeader('Заголовок сайта', 1))
-
-cms_page_container = CmsPageContainer(1,
-                                   'Красивый заголовок',
-                                   'ada')
-
-
-print(cms_page_container.render())
-
-
-#
-# cms_page = CmsPage('0', 'Главная страница', '0')
-#
-# cms_page.add(CmsPageHeader('Заголовок сайта', 1))
-# cms_page.add(CmsPageHeader('Заголовок сайта', 2))
-# cms_page.add(CmsPageHeader('Заголовок сайта', 3))
-# cms_page.add(CmsPageHeader('Заголовок сайта', 4))
-
-
-# print(cms_page.render())
+    @staticmethod
+    def create(id, css_class):
+        cms_page_container = CmsPageContainer(id, css_class)
+        return cms_page_container

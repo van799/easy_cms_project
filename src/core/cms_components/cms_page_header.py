@@ -24,7 +24,3 @@ class CmsPageHeader:
         else:
             raise Exception('The wrong text size is indicated')
         return doc.getvalue()
-
-
-cms_page_header = CmsPageHeader('Красивый заголовок', 1)
-print(cms_page_header.render())
