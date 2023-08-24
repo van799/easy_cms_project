@@ -1,7 +1,7 @@
 from yattag import Doc, indent
 
 
-class CmsPageHeader:
+class CmsHeading:
     def __init__(self, text: str, size: int):
         self.text = text
         self.size = size
