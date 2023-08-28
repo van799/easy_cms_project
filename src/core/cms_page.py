@@ -3,7 +3,8 @@ from yattag import Doc, indent
 from core.cms_components.cms_hyperlink import CmsHyperlink
 from core.cms_components.cms_images import CmsImages
 from core.cms_components.cms_page_container import CmsPageContainer
-from core.cms_components.cms_page_header import CmsPageHeader
+from core.cms_components.cms_page_header import CmsHeading
+from core.cms_header import CmsPageHeader
 
 
 class CmsPage:
@@ -55,18 +56,21 @@ class CmsPage:
 
 
 cms_page = CmsPage('0', 'Главная страница', '0')
+navig_bar = {
+    'url_hyperlink1': 'описание1',
+    'url_hyperlink2': 'описание2',
+    'url_hyperlink3': 'описание3',
+}
 
-cms_page.add(CmsPageHeader('Заголовок сайта', 1))
-cms_page.add(CmsPageHeader('Заголовок сайта', 2))
-cms_page.add(CmsPageHeader('Заголовок сайта', 3))
-cms_page.add(CmsPageHeader('Заголовок сайта', 4))
+cms_header = CmsPageHeader('id', 'ссылка на лого', 'описание меню сайта', navig_bar, 'класс_хеадера')
 
+cms_header.render()
+cms_page.add(cms_header)
 cms_page.add(CmsPageContainer.create(1, 'green_text').
-             add(CmsPageHeader('Заголовок сайта1', 1)).
-             add(CmsPageHeader('Заголовок сайта2', 1)).
+             add(CmsHeading('Заголовок сайта1', 1)).
+             add(CmsHeading('Заголовок сайта2', 1)).
              add(CmsImages('pic.img', 'cool_pic')).
              add(CmsHyperlink('yandex.ru', 'cool_link', 'cool_link'))
              )
-
 
 print(cms_page.render())

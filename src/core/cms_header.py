@@ -57,12 +57,3 @@ class CmsPageHeader:
         return doc.getvalue()
 
 
-navig_bar = {
-    'url_hyperlink1': 'описание1',
-    'url_hyperlink2': 'описание2',
-    'url_hyperlink3': 'описание3',
-}
-
-cms_header = CmsPageHeader('id', 'ссылка на лого', 'описание меню сайта', navig_bar, 'класс_хеадера')
-
-print(cms_header.render())
